@@ -1,0 +1,126 @@
+.services-section {
+    background: linear-gradient(135deg, #1e1e2f, #282a36);
+    color: #fff;
+    padding: 60px 0;
+  
+    .services-header {
+      .heading {
+        font-size: 2.5rem;
+        color: #f8f8f2;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+  
+      .subheading {
+        font-size: 1.2rem;
+        color: #bd93f9;
+        margin-bottom: 40px;
+      }
+    }
+  
+    .service-card {
+      margin-bottom: 30px;
+  
+      .card {
+        border: none;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  
+        &:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+  
+        .service-icon {
+          font-size: 3rem;
+          color: #bd93f9;
+          margin-bottom: 20px;
+        }
+  
+        .service-title {
+          font-size: 1.5rem;
+          margin-bottom: 10px;
+          color: #f8f8f2;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+  
+        .service-description {
+          font-size: 1rem;
+          color: #d6d6d6;
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .services-section {
+      padding: 40px 20px;
+  
+      .services-header {
+        .heading {
+          font-size: 2rem;
+        }
+  
+        .subheading {
+          font-size: 1rem;
+        }
+      }
+  
+      .service-card {
+        .card {
+          padding: 15px;
+  
+          .service-icon {
+            font-size: 2.5rem;
+          }
+  
+          .service-title {
+            font-size: 1.2rem;
+          }
+  
+          .service-description {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .services-section {
+      .services-header {
+        .heading {
+          font-size: 1.8rem;
+        }
+  
+        .subheading {
+          font-size: 0.9rem;
+        }
+      }
+  
+      .service-card {
+        .card {
+          padding: 10px;
+  
+          .service-icon {
+            font-size: 2rem;
+          }
+  
+          .service-title {
+            font-size: 1rem;
+          }
+  
+          .service-description {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+  

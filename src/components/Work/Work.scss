@@ -1,0 +1,141 @@
+.work-section {
+    background: linear-gradient(135deg, #1e1e2f, #282a36);
+    color: #fff;
+    padding: 60px 0;
+  
+    .work-header {
+      .heading {
+        font-size: 2.5rem;
+        color: #f8f8f2;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+  
+      .subheading {
+        font-size: 1.2rem;
+        color: #bd93f9;
+        margin-bottom: 40px;
+      }
+    }
+  
+    .work-card {
+      margin-bottom: 30px;
+  
+      .card {
+        border: none;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  
+        &:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+  
+        .work-title {
+          font-size: 1.5rem;
+          margin-bottom: 10px;
+          color: #f8f8f2;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+  
+        .work-description {
+          font-size: 1rem;
+          color: #d6d6d6;
+          line-height: 1.6;
+          margin-bottom: 15px;
+        }
+  
+        .work-technologies {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          justify-content: center;
+  
+          .tech-tag {
+            background: #44475a;
+            color: #f8f8f2;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-transform: capitalize;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .work-section {
+      padding: 40px 20px;
+  
+      .work-header {
+        .heading {
+          font-size: 2rem;
+        }
+  
+        .subheading {
+          font-size: 1rem;
+        }
+      }
+  
+      .work-card {
+        .card {
+          padding: 15px;
+  
+          .work-title {
+            font-size: 1.2rem;
+          }
+  
+          .work-description {
+            font-size: 0.9rem;
+          }
+  
+          .work-technologies {
+            .tech-tag {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .work-section {
+      .work-header {
+        .heading {
+          font-size: 1.8rem;
+        }
+  
+        .subheading {
+          font-size: 0.9rem;
+        }
+      }
+  
+      .work-card {
+        .card {
+          padding: 10px;
+  
+          .work-title {
+            font-size: 1rem;
+          }
+  
+          .work-description {
+            font-size: 0.8rem;
+          }
+  
+          .work-technologies {
+            .tech-tag {
+              font-size: 0.7rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  
