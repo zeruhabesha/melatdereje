@@ -1,10 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import {
-  ThemeProvider as NextThemesProvider,
-  type ThemeProviderProps as NextThemesProviderProps
-} from 'next-themes'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
+
+type NextThemesProviderProps = React.ComponentProps<typeof NextThemesProvider>
 
 interface ThemeProviderProps extends Omit<NextThemesProviderProps, 'children'> {
   children: React.ReactNode
