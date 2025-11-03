@@ -43,28 +43,44 @@ export default function InteractiveBackground() {
     };
   }, [handleMouseMove, handleMouseEnter, handleMouseLeave]);
 
-  useEffect(() => {
+  const rebuildGrid = useCallback(() => {
     if (!gridRef.current) return;
-    
-    // Clear existing grid
-    gridRef.current.innerHTML = '';
-    
-    // Calculate grid size based on viewport
-    const isMobile = window.innerWidth < 768;
-    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-    
-    const gridSize = isMobile ? 10 : isTablet ? 15 : 20;
+    const grid = gridRef.current;
+
+    // Guard for non-browser environments
+    if (typeof window === 'undefined') return;
+
+    const width = window.innerWidth;
+    const isSmall = width < 640;
+    const isMedium = width >= 640 && width < 1024;
+
+    const gridSize = isSmall ? 8 : isMedium ? 12 : 18;
     const totalCells = gridSize * gridSize;
-    
-    // Set grid template columns
-    gridRef.current.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
-    gridRef.current.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
-    
-    // Create grid cells
+
+    grid.innerHTML = '';
+    grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+
+    const fragment = document.createDocumentFragment();
     for (let i = 0; i < totalCells; i++) {
-      const cell = document.createElement('div');
-      gridRef.current.appendChild(cell);
+      fragment.appendChild(document.createElement('div'));
     }
+    grid.appendChild(fragment);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    rebuildGrid();
+
+    const handleResize = () => {
+      window.requestAnimationFrame(rebuildGrid);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [rebuildGrid, themeVariant]);
   }, [themeVariant]);
 
   // Create floating elements with responsive sizing
@@ -76,6 +92,16 @@ export default function InteractiveBackground() {
     floatingElements.current.forEach((el: HTMLElement | null) => el?.remove());
     floatingElements.current = [];
     
+    const width = window.innerWidth;
+    const isMobile = width < 640;
+    const isTablet = width >= 640 && width < 1024;
+    const count = isMobile ? 2 : isTablet ? 3 : 5;
+    const colors =
+      themeVariant === 'dark'
+        ? [
+            'hsl(330 100% 70% / 0.85)',
+            'hsl(315 95% 68% / 0.75)',
+            'hsl(340 100% 72% / 0.65)'
     const isMobile = window.innerWidth < 768;
     const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
     const count = isMobile ? 2 : isTablet ? 3 : 4;
@@ -93,9 +119,9 @@ export default function InteractiveBackground() {
           ];
 
     for (let i = 0; i < count; i++) {
-      const baseSize = isMobile ? 80 : isTablet ? 150 : 200;
-      const size = Math.random() * baseSize * 0.5 + baseSize;
-      const duration = (Math.random() * 20 + 20) * (isMobile ? 1.5 : 1);
+      const baseSize = isMobile ? 72 : isTablet ? 130 : 220;
+      const size = Math.random() * baseSize * 0.45 + baseSize;
+      const duration = (Math.random() * 18 + 18) * (isMobile ? 1.35 : 1);
       const delay = Math.random() * 5;
       
       const el = document.createElement('div');
@@ -103,6 +129,7 @@ export default function InteractiveBackground() {
       el.style.width = `${size}px`;
       el.style.height = `${size}px`;
       el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.opacity = themeVariant === 'dark' ? '0.32' : '0.2';
       el.style.opacity = themeVariant === 'dark' ? '0.28' : '0.18';
       el.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
       
