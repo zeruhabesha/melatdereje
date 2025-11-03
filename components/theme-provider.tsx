@@ -9,6 +9,23 @@ interface ThemeProviderProps extends Omit<NextThemesProviderProps, 'children'> {
   children: React.ReactNode
 }
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
+export function ThemeProvider({
+  children,
+  attribute = 'class',
+  defaultTheme = 'light',
+  enableSystem = true,
+  disableTransitionOnChange = true,
+  ...props
+}: ThemeProviderProps) {
+  return (
+    <NextThemesProvider
+      attribute={attribute}
+      defaultTheme={defaultTheme}
+      enableSystem={enableSystem}
+      disableTransitionOnChange={disableTransitionOnChange}
+      {...props}
+    >
+      {children}
+    </NextThemesProvider>
+  )
 }

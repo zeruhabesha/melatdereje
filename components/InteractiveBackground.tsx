@@ -11,6 +11,7 @@ export default function InteractiveBackground() {
   const floatingElements = useRef<HTMLDivElement[]>([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const themeVariant = resolvedTheme ?? 'light';
 
   // Handle mouse movement for parallax effect (desktop only)
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -64,7 +65,7 @@ export default function InteractiveBackground() {
       const cell = document.createElement('div');
       gridRef.current.appendChild(cell);
     }
-  }, [resolvedTheme]);
+  }, [themeVariant]);
 
   // Create floating elements with responsive sizing
   const createFloatingElements = useCallback(() => {
@@ -78,11 +79,18 @@ export default function InteractiveBackground() {
     const isMobile = window.innerWidth < 768;
     const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
     const count = isMobile ? 2 : isTablet ? 3 : 4;
-    const colors = [
-      'hsl(var(--primary))',
-      'hsl(var(--accent))',
-      'hsl(var(--secondary))'
-    ];
+    const colors =
+      themeVariant === 'dark'
+        ? [
+            'hsl(var(--primary) / 0.75)',
+            'hsl(var(--accent) / 0.7)',
+            'hsl(var(--secondary) / 0.45)'
+          ]
+        : [
+            'hsl(var(--primary) / 0.4)',
+            'hsl(var(--accent) / 0.35)',
+            'hsl(var(--secondary) / 0.25)'
+          ];
 
     for (let i = 0; i < count; i++) {
       const baseSize = isMobile ? 80 : isTablet ? 150 : 200;
@@ -95,6 +103,7 @@ export default function InteractiveBackground() {
       el.style.width = `${size}px`;
       el.style.height = `${size}px`;
       el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.opacity = themeVariant === 'dark' ? '0.28' : '0.18';
       el.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
       
       // Random position
@@ -105,7 +114,7 @@ export default function InteractiveBackground() {
       containerRef.current.appendChild(el);
       floatingElements.current.push(el);
     }
-  }, [resolvedTheme]);
+  }, [themeVariant]);
 
   useEffect(() => {
     // Skip if not in browser
@@ -144,8 +153,10 @@ export default function InteractiveBackground() {
   }, [mousePosition.x, mousePosition.y]);
 
   return (
-    <div 
-      className="interactive-bg" 
+    <div
+      aria-hidden="true"
+      className="interactive-bg"
+      data-theme={themeVariant}
       ref={containerRef}
       style={{
         '--mouse-x': `${mousePosition.x * 20}px`,
