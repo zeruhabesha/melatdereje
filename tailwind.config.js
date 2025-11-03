@@ -33,10 +33,8 @@ module.exports = {
   corePlugins: {
     preflight: true,
   },
-  // Add this for Turbopack compatibility
-  experimental: {
-    optimizeUniversalDefaults: true,
-  },
+  // Removed experimental optimizeUniversalDefaults as it's not needed
+  // and causes warnings in newer Tailwind versions
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
