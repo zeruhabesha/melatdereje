@@ -81,6 +81,7 @@ export default function InteractiveBackground() {
 
     return () => window.removeEventListener('resize', handleResize);
   }, [rebuildGrid, themeVariant]);
+  }, [themeVariant]);
 
   // Create floating elements with responsive sizing
   const createFloatingElements = useCallback(() => {
@@ -101,6 +102,15 @@ export default function InteractiveBackground() {
             'hsl(330 100% 70% / 0.85)',
             'hsl(315 95% 68% / 0.75)',
             'hsl(340 100% 72% / 0.65)'
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    const count = isMobile ? 2 : isTablet ? 3 : 4;
+    const colors =
+      themeVariant === 'dark'
+        ? [
+            'hsl(var(--primary) / 0.75)',
+            'hsl(var(--accent) / 0.7)',
+            'hsl(var(--secondary) / 0.45)'
           ]
         : [
             'hsl(var(--primary) / 0.4)',
@@ -120,6 +130,7 @@ export default function InteractiveBackground() {
       el.style.height = `${size}px`;
       el.style.background = colors[Math.floor(Math.random() * colors.length)];
       el.style.opacity = themeVariant === 'dark' ? '0.32' : '0.2';
+      el.style.opacity = themeVariant === 'dark' ? '0.28' : '0.18';
       el.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
       
       // Random position
