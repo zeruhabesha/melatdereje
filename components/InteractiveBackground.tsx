@@ -80,6 +80,11 @@ export default function InteractiveBackground() {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
+  }, [rebuildGrid]);
+
+  useEffect(() => {
+    rebuildGrid();
+  }, [rebuildGrid, themeVariant]);
   }, [rebuildGrid, themeVariant]);
   }, [themeVariant]);
 
