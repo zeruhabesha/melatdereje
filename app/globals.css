@@ -1,49 +1,378 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+/* Modern Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-/*! @import */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom base styles */
-@layer base {
-  :root {
-  --background: oklch(0.98 0.01 280);
-  --foreground: oklch(0.25 0.02 280);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.25 0.02 280);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.25 0.02 280);
-  --primary: oklch(0.7 0.15 320);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.88 0.08 30);
-  --secondary-foreground: oklch(0.25 0.02 280);
-  --muted: oklch(0.93 0.02 280);
-  --muted-foreground: oklch(0.56 0.02 280);
-  --accent: oklch(0.75 0.12 10);
-  --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.86 0.05 280 / 0.3);
-  --input: oklch(0.96 0.01 280);
-  --ring: oklch(0.7 0.15 320);
-  --chart-1: oklch(0.7 0.15 320);
-  --chart-2: oklch(0.88 0.08 30);
-  --chart-3: oklch(0.75 0.12 10);
-  --chart-4: oklch(0.65 0.1 340);
-  --chart-5: oklch(0.82 0.08 50);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.98 0.01 280);
-  --sidebar-foreground: oklch(0.25 0.02 280);
-  --sidebar-primary: oklch(0.7 0.15 320);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.88 0.08 30);
-  --sidebar-accent-foreground: oklch(0.25 0.02 280);
-  --sidebar-border: oklch(0.93 0.02 280);
-  --sidebar-ring: oklch(0.7 0.15 320);
+/* Interactive Background */
+.interactive-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
 
+.interactive-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  opacity: 0.15;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Responsive grid adjustments */
+@media (min-width: 640px) {
+  .interactive-grid {
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .interactive-grid {
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+  }
+}
+
+.interactive-grid > div {
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.light .interactive-grid > div {
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark .interactive-grid > div {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.interactive-grid > div {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-grid > div:hover {
+  background: hsl(var(--accent) / 0.4);
+  transform: scale(1.1);
+  z-index: 1;
+  box-shadow: 0 0 20px hsl(var(--accent) / 0.3);
+  border-color: hsl(var(--accent) / 0.6) !important;
+}
+
+/* Floating elements */
+.floating-element {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(40px);
+  opacity: 0.15;
+  transition: all 0.5s ease;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize animations for mobile */
+@media (prefers-reduced-motion: reduce) {
+  .floating-element {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .interactive-grid > div:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .gradient-overlay {
+    animation: none !important;
+  }
+}
+
+.light .floating-element {
+  background: var(--primary);
+}
+
+.dark .floating-element {
+  background: hsl(330, 100%, 75%);
+  opacity: 0.2;  /* Slightly more visible */
+  filter: blur(50px);  /* Softer glow */
+}
+
+/* Animated gradient overlay */
+.gradient-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  opacity: 0.5;
+  will-change: background-position;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  
+  /* Optimize for mobile */
+  @media (max-width: 767px) {
+    opacity: 0.3;
+    background-size: 150% 150% !important;
+  }
+  background: radial-gradient(
+    circle at 20% 30%,
+    hsl(var(--primary) / 0.2) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 80% 70%,
+    hsl(var(--accent) / 0.2) 0%,
+    transparent 50%
+  );
+  animation: gradientMove 45s ease infinite;
+  background-size: 200% 200%;
+}
+
+.dark .gradient-overlay {
+  background: radial-gradient(
+    circle at 20% 30%,
+    hsl(330, 100%, 70% / 0.3) 0%,
+    transparent 60%
+  ),
+  radial-gradient(
+    circle at 80% 70%,
+    hsl(330, 80%, 60% / 0.25) 0%,
+    transparent 60%
+  );
+  opacity: 0.6;  /* More visible in dark mode */
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(5%, 5%) rotate(5deg);
+  }
+  50% {
+    transform: translate(0, 10%) rotate(0deg);
+  }
+  75% {
+    transform: translate(-5%, 5%) rotate(-5deg);
+  }
+}
+
+/* Optimize animations for mobile */
+@media (max-width: 1023px) {
+  @keyframes float {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(0, 5%) rotate(0deg);
+    }
+  }
+  
+  /* Reduce motion for better performance */
+  .interactive-grid > div {
+    transition: none !important;
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Modern CSS Variables */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 327 100% 60%;  /* Brighter pink for light mode */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 327 100% 60%;  /* Brighter pink for light mode */
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
+  --radius: 0.75rem;
+  --glass: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --sidebar: 240 5.1% 96.1%;
+  --sidebar-foreground: 240 5.9% 10%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 240 5.9% 90%;
+  --sidebar-ring: 240 5.9% 10%;
+}
+
+.dark {
+  --background: 0 0% 5%;  /* Darker background for better contrast */
+  --foreground: 0 0% 98%;
+  --card: 0 0% 7%;  /* Slightly lighter than background */
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 7%;  /* Match card color */
+  --popover-foreground: 0 0% 98%;
+  --primary: 330 100% 75%;  /* Brighter, more saturated pink */
+  --primary-foreground: 0 0% 5%;  /* Dark text for better contrast */
+  --secondary: 330 50% 15%;  /* Darker pink tint */
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 4% 20%;  /* Slightly lighter than before */
+  --muted-foreground: 240 5% 74.9%;  /* Brighter muted text */
+  --accent: 330 100% 75%;  /* Match primary color */
+  --accent-foreground: 0 0% 5%;  /* Dark text for better contrast */
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+  --glass: rgba(0, 0, 0, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --sidebar: 240 3.7% 15.9%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 0 0% 98%;
+  --sidebar-primary-foreground: 240 5.9% 10%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 240 4.9% 83.9%;
+}
+
+/* Base Styles */
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 3.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 4rem;
+    }
+  }
+  
+  h2 {
+    font-size: 1.875rem;
+  }
+  
+  @media (min-width: 768px) {
+    h2 {
+      font-size: 2.25rem;
+    }
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    h3 {
+      font-size: 1.875rem;
+    }
+  }
+  
+  /* Glass effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .dark .glass {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.2);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.3);
+  }
+}
 .dark {
   --background: oklch(0.15 0.02 280);
   --foreground: oklch(0.95 0.01 280);
@@ -398,5 +727,4 @@
     width: 250px;
     height: 250px;
   }
-}
 }

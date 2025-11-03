@@ -1,19 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Server components external packages
-  serverExternalPackages: ['@tremor/react'],
+  // Enable React strict mode (recommended for development)
+  reactStrictMode: true,
   
-  // Enable Turbopack with proper configuration
+  // Experimental features
   experimental: {
     turbo: {
       rules: {
         // Add any module rules here if needed
       }
-    }
-  },
-  
-  // Enable React strict mode (recommended for development)
-  reactStrictMode: true,
+    },
+    serverComponentsExternalPackages: ['@tremor/react']
+  }
 };
 
 // Webpack configuration (fallback)

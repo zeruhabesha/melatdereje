@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { GeistSans, GeistMono } from 'geist/font'
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
+import InteractiveBackground from "@/components/InteractiveBackground"
 import "./globals.css"
 
 const _geistSans = GeistSans
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans antialiased`}>
+        <InteractiveBackground />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

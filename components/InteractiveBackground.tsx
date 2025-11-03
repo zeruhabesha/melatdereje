@@ -1,0 +1,178 @@
+'use client';
+
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { useTheme } from 'next-themes';
+import { motion, AnimatePresence } from 'framer-motion';
+
+export default function InteractiveBackground() {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { resolvedTheme } = useTheme();
+  const floatingElements = useRef<HTMLDivElement[]>([]);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Handle mouse movement for parallax effect (desktop only)
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!containerRef.current || typeof window === 'undefined' || window.innerWidth < 1024) return;
+    
+    const { left, top, width, height } = containerRef.current.getBoundingClientRect();
+    const x = (e.clientX - left) / width - 0.5;
+    const y = (e.clientY - top) / height - 0.5;
+    
+    setMousePosition({ x, y });
+  }, []);
+
+  // Handle mouse enter/leave for interactive elements
+  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+  const handleMouseLeave = useCallback(() => setIsHovered(false), []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mouseenter', handleMouseEnter);
+    container.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mouseenter', handleMouseEnter);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [handleMouseMove, handleMouseEnter, handleMouseLeave]);
+
+  useEffect(() => {
+    if (!gridRef.current) return;
+    
+    // Clear existing grid
+    gridRef.current.innerHTML = '';
+    
+    // Calculate grid size based on viewport
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    
+    const gridSize = isMobile ? 10 : isTablet ? 15 : 20;
+    const totalCells = gridSize * gridSize;
+    
+    // Set grid template columns
+    gridRef.current.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+    gridRef.current.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+    
+    // Create grid cells
+    for (let i = 0; i < totalCells; i++) {
+      const cell = document.createElement('div');
+      gridRef.current.appendChild(cell);
+    }
+  }, [resolvedTheme]);
+
+  // Create floating elements with responsive sizing
+  const createFloatingElements = useCallback(() => {
+    // Skip if not in browser or container not available
+    if (typeof window === 'undefined' || !containerRef.current) return;
+    
+    // Clear existing elements
+    floatingElements.current.forEach((el: HTMLElement | null) => el?.remove());
+    floatingElements.current = [];
+    
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    const count = isMobile ? 2 : isTablet ? 3 : 4;
+    const colors = [
+      'hsl(var(--primary))',
+      'hsl(var(--accent))',
+      'hsl(var(--secondary))'
+    ];
+
+    for (let i = 0; i < count; i++) {
+      const baseSize = isMobile ? 80 : isTablet ? 150 : 200;
+      const size = Math.random() * baseSize * 0.5 + baseSize;
+      const duration = (Math.random() * 20 + 20) * (isMobile ? 1.5 : 1);
+      const delay = Math.random() * 5;
+      
+      const el = document.createElement('div');
+      el.className = 'floating-element';
+      el.style.width = `${size}px`;
+      el.style.height = `${size}px`;
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+      
+      // Random position
+      el.style.position = 'absolute';
+      el.style.left = `${Math.random() * 80 + 10}%`;
+      el.style.top = `${Math.random() * 80 + 10}%`;
+      
+      containerRef.current.appendChild(el);
+      floatingElements.current.push(el);
+    }
+  }, [resolvedTheme]);
+
+  useEffect(() => {
+    // Skip if not in browser
+    if (typeof window === 'undefined') return;
+
+    // Initial creation
+    createFloatingElements();
+
+    // Recreate on window resize
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(createFloatingElements, 200);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(resizeTimeout);
+      floatingElements.current.forEach(el => el?.remove());
+    };
+  }, [createFloatingElements]);
+
+  // Parallax effect for floating elements (desktop only)
+  const getParallaxStyle = useCallback((depth = 1) => {
+    // Return default style during SSR or if not a desktop
+    if (typeof window === 'undefined' || window.innerWidth < 1024) {
+      return { transform: 'none' } as React.CSSProperties;
+    }
+    return {
+      transform: `translate(${mousePosition.x * 20 * depth}px, ${mousePosition.y * 20 * depth}px)`,
+      transition: 'transform 0.3s ease-out'
+    } as React.CSSProperties;
+  }, [mousePosition.x, mousePosition.y]);
+
+  return (
+    <div 
+      className="interactive-bg" 
+      ref={containerRef}
+      style={{
+        '--mouse-x': `${mousePosition.x * 20}px`,
+        '--mouse-y': `${mousePosition.y * 20}px`,
+      } as React.CSSProperties}
+    >
+      <div className="gradient-overlay" style={getParallaxStyle(0.5)} />
+      <div className="interactive-grid" ref={gridRef} />
+      
+      {/* Animated cursor highlight */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div 
+            className="absolute w-64 h-64 rounded-full pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, hsl(var(--accent) / 0.1) 0%, transparent 70%)',
+              left: `calc(50% + var(--mouse-x, 0px))`,
+              top: `calc(50% + var(--mouse-y, 0px))`,
+              transform: 'translate(-50%, -50%)',
+            }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.5 }}
+            transition={{ duration: 0.3 }}
+          />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
