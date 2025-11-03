@@ -1,12 +1,12 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { GeistSans, GeistMono } from 'geist/font'
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
-const _geistSans = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const _geistSans = GeistSans
+const _geistMono = GeistMono
 
 export const metadata: Metadata = {
   title: "MELAT DEREJE - Architect & UI Designer",
