@@ -23,12 +23,15 @@ module.exports = {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
       },
     },
   },
-  // Disable the default Tailwind CSS reset
+  // Enable the default Tailwind CSS reset
   corePlugins: {
-    preflight: false,
+    preflight: true,
   },
   // Add this for Turbopack compatibility
   experimental: {
