@@ -263,68 +263,68 @@
 
 /* Modern CSS Variables */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
+  --background: 0 0% 99%;
+  --foreground: 240 10% 10%;
   --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
+  --card-foreground: 240 10% 10%;
   --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --primary: 327 100% 60%;  /* Brighter pink for light mode */
+  --popover-foreground: 240 10% 10%;
+  --primary: 330 85% 58%;  /* Rich rose/pink */
   --primary-foreground: 0 0% 100%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 327 100% 60%;  /* Brighter pink for light mode */
+  --secondary: 240 5% 96%;
+  --secondary-foreground: 240 6% 10%;
+  --muted: 240 5% 96%;
+  --muted-foreground: 240 4% 40%;
+  --accent: 330 85% 58%;  /* Match primary */
   --accent-foreground: 0 0% 100%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 240 5.9% 10%;
+  --border: 240 6% 90%;
+  --input: 240 6% 92%;
+  --ring: 330 85% 58%;
   --radius: 0.75rem;
   --glass: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --sidebar: 240 5.1% 96.1%;
-  --sidebar-foreground: 240 5.9% 10%;
-  --sidebar-primary: 240 5.9% 10%;
+  --sidebar: 240 5% 96%;
+  --sidebar-foreground: 240 6% 10%;
+  --sidebar-primary: 240 6% 10%;
   --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 240 4.8% 95.9%;
-  --sidebar-accent-foreground: 240 5.9% 10%;
-  --sidebar-border: 240 5.9% 90%;
-  --sidebar-ring: 240 5.9% 10%;
+  --sidebar-accent: 240 5% 96%;
+  --sidebar-accent-foreground: 240 6% 10%;
+  --sidebar-border: 240 6% 90%;
+  --sidebar-ring: 240 6% 10%;
 }
 
 .dark {
-  --background: 0 0% 5%;  /* Darker background for better contrast */
-  --foreground: 0 0% 98%;
-  --card: 0 0% 7%;  /* Slightly lighter than background */
-  --card-foreground: 0 0% 98%;
-  --popover: 0 0% 7%;  /* Match card color */
-  --popover-foreground: 0 0% 98%;
-  --primary: 330 100% 75%;  /* Brighter, more saturated pink */
-  --primary-foreground: 0 0% 5%;  /* Dark text for better contrast */
-  --secondary: 330 50% 15%;  /* Darker pink tint */
-  --secondary-foreground: 0 0% 98%;
-  --muted: 240 4% 20%;  /* Slightly lighter than before */
-  --muted-foreground: 240 5% 74.9%;  /* Brighter muted text */
-  --accent: 330 100% 75%;  /* Match primary color */
-  --accent-foreground: 0 0% 5%;  /* Dark text for better contrast */
+  --background: 0 0% 7%;  /* Slightly lighter for better contrast */
+  --foreground: 0 0% 96%;
+  --card: 0 0% 10%;  /* Elevated surface */
+  --card-foreground: 0 0% 96%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 96%;
+  --primary: 330 90% 68%;  /* Softer, more elegant pink */
+  --primary-foreground: 0 0% 10%;
+  --secondary: 240 5% 16%;
+  --secondary-foreground: 0 0% 96%;
+  --muted: 240 5% 18%;
+  --muted-foreground: 240 5% 65%;
+  --accent: 330 90% 68%;
+  --accent-foreground: 0 0% 10%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 240 4.9% 83.9%;
-  --glass: rgba(0, 0, 0, 0.2);
-  --glass-border: rgba(255, 255, 255, 0.05);
-  --sidebar: 240 3.7% 15.9%;
-  --sidebar-foreground: 0 0% 98%;
-  --sidebar-primary: 0 0% 98%;
-  --sidebar-primary-foreground: 240 5.9% 10%;
-  --sidebar-accent: 240 3.7% 15.9%;
-  --sidebar-accent-foreground: 0 0% 98%;
-  --sidebar-border: 240 3.7% 15.9%;
-  --sidebar-ring: 240 4.9% 83.9%;
+  --border: 240 4% 18%;
+  --input: 240 4% 16%;
+  --ring: 330 90% 68%;
+  --glass: rgba(0, 0, 0, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --sidebar: 240 4% 12%;
+  --sidebar-foreground: 0 0% 96%;
+  --sidebar-primary: 0 0% 96%;
+  --sidebar-primary-foreground: 240 6% 10%;
+  --sidebar-accent: 240 4% 18%;
+  --sidebar-accent-foreground: 0 0% 96%;
+  --sidebar-border: 240 4% 18%;
+  --sidebar-ring: 240 5% 83.9%;
 }
 
 /* Base Styles */
@@ -674,31 +674,18 @@
   }
 }
 
-/* Typing Animation */
+/* Typing Animation - Fixed height to prevent layout shifts */
 .typing-container {
   display: flex;
   align-items: center;
-  min-height: 1.5em;
+  position: relative;
+  overflow: visible;
 }
 
 .typing-text {
   display: inline-block;
-  overflow: hidden;
-  border-right: 3px solid var(--primary);
   white-space: nowrap;
-  margin: 0;
-  padding-right: 3px;
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--primary); }
+  overflow: visible;
 }
 
 @keyframes slideInDown {

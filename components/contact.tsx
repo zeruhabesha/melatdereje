@@ -70,7 +70,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-20 px-6 border-t border-border">
+    <section id="contact" className="relative py-20 px-6 mt-20 border-t border-border">
       <div className="max-w-6xl mx-auto">
         <div
           className={`transition-all duration-1000 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
@@ -93,7 +93,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="w-full px-6 py-3 bg-white/50 border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                    className="w-full px-6 py-3 bg-card/50 dark:bg-card/30 border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                   />
                 </div>
                 <div>
@@ -103,7 +103,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
-                    className="w-full px-6 py-3 bg-white/50 border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                    className="w-full px-6 py-3 bg-card/50 dark:bg-card/30 border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                   />
                 </div>
                 <div>
@@ -113,7 +113,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     required
-                    className="w-full px-6 py-3 bg-white/50 border border-border rounded-lg focus:outline-none focus:border-primary transition-colors resize-none"
+                    className="w-full px-6 py-3 bg-card/50 dark:bg-card/30 border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
                   />
                 </div>
                 <button
@@ -172,7 +172,7 @@ export default function Contact() {
                         aria-label={social.label}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-12 h-12 bg-white/50 border border-border rounded-lg flex items-center justify-center text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 hover:scale-110"
+                        className="w-12 h-12 bg-card/50 dark:bg-card/30 border border-border rounded-lg flex items-center justify-center text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 hover:scale-110"
                       >
                         <Icon size={20} />
                       </a>
@@ -184,7 +184,7 @@ export default function Contact() {
           </div>
 
           {/* Footer */}
-          <div className="flex flex-col md:flex-row items-center justify-center pt-12 border-t border-border">
+          <div className="flex flex-col md:flex-row items-center justify-center pt-12 pb-4 border-t border-border">
             <p className="text-sm text-muted-foreground">© 2025 MELAT DEREJE. All rights reserved.</p>
           </div>
         </div>

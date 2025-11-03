@@ -21,7 +21,7 @@ export default function Header({ isLoaded }: HeaderProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[100] bg-white/95 dark:bg-secondary/95 backdrop-blur-md shadow-sm transition-all duration-500 ${isLoaded ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
+      className={`fixed top-0 left-0 right-0 z-[100] bg-white/98 dark:bg-[hsl(var(--card))]/98 backdrop-blur-md shadow-sm border-b border-border/50 transition-all duration-500 ${isLoaded ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -42,13 +42,10 @@ export default function Header({ isLoaded }: HeaderProps) {
                 key={idx}
                 href={item.href}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  item.href === '#' ? 'text-primary' : 'text-foreground hover:text-primary/90 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  item.href === '#' ? 'text-primary bg-primary/10' : 'text-foreground hover:text-primary/90 hover:bg-muted'
                 }`}
               >
                 {item.label}
-                {item.href === '#' && (
-                  <span className="block h-0.5 bg-gradient-to-r from-primary to-accent mt-1 w-5 mx-auto" />
-                )}
               </Link>
             ))}
           </div>
@@ -58,9 +55,9 @@ export default function Header({ isLoaded }: HeaderProps) {
             <ThemeToggle />
             
             {/* CTA Button */}
-            <button className="hidden md:block px-5 py-2 bg-gradient-to-r from-primary to-accent text-white rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 font-medium text-sm">
+            <a href="#contact" className="hidden md:block px-5 py-2 bg-gradient-to-r from-primary to-accent text-white rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 font-medium text-sm">
               Let's Talk
-            </button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}

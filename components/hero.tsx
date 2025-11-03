@@ -63,7 +63,7 @@ export default function Hero({ isLoaded }: HeroProps) {
   }, [])
 
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 pt-24 pb-16 sm:pb-24">
+    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 pt-28 pb-20 sm:pb-24">
       {/* Interactive Background Elements */}
       <div className="floating-shapes">
         <span></span>
@@ -82,17 +82,17 @@ export default function Hero({ isLoaded }: HeroProps) {
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground mb-3 leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground mb-3 leading-tight min-h-[3rem] sm:min-h-[3.5rem] lg:min-h-[5rem]">
             {displayText}
             <span className="text-primary animate-pulse">_</span>
           </h1>
-          
-          <div className="typing-container mb-6">
-            <p className="text-2xl md:text-3xl font-medium text-muted-foreground">
-              <span className="typing-text">
+
+          <div className="typing-container mb-6 h-[3rem] md:h-[3.5rem] flex items-center">
+            <p className="text-2xl md:text-3xl font-medium text-muted-foreground w-full">
+              <span className="inline-block min-w-[15ch]">
                 {profession}
               </span>
-              <span className="text-primary animate-pulse">|</span>
+              <span className="text-primary animate-pulse ml-1">|</span>
             </p>
           </div>
 
