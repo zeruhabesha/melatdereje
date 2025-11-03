@@ -63,7 +63,7 @@ export default function Hero({ isLoaded }: HeroProps) {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 pt-20 pb-20">
+    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 pt-24 pb-16 sm:pb-24">
       {/* Interactive Background Elements */}
       <div className="floating-shapes">
         <span></span>
@@ -71,18 +71,18 @@ export default function Hero({ isLoaded }: HeroProps) {
         <span></span>
       </div>
       
-      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-16 items-center relative z-10">
         {/* Left Content */}
         <div
           className={`transition-all duration-1000 ${isLoaded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}`}
         >
           <div className="mb-6">
             <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold mb-4">
-              ✨ Welcome to My Portfolio
+              Welcome to My Portfolio
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-2 leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground mb-3 leading-tight">
             {displayText}
             <span className="text-primary animate-pulse">_</span>
           </h1>
@@ -96,7 +96,7 @@ export default function Hero({ isLoaded }: HeroProps) {
             </p>
           </div>
 
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
             Architect & UI Designer crafting beautiful spaces—both physical and digital. I blend timeless design
             principles with modern innovation to create experiences that inspire.
           </p>
@@ -106,19 +106,24 @@ export default function Hero({ isLoaded }: HeroProps) {
               View My Work
               <ArrowRight size={20} />
             </button>
-            <button className="px-8 py-3 border-2 border-primary text-primary rounded-full font-semibold hover:bg-primary/5 transition-all duration-300">
-              Download CV
-            </button>
+            <a
+              href="https://drive.google.com/file/d/1PRkLGEMIo1fIXxuVigdU21lyhbdB94pl/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 border-2 border-primary text-primary rounded-full font-semibold hover:bg-primary/5 transition-all duration-300"
+            >
+              View CV
+            </a>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16 pt-12 border-t border-border">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-border/70">
             <div className="animate-slideInUp" style={{ animationDelay: "0.2s" }}>
               <div className="text-3xl font-bold text-primary mb-2">50+</div>
               <p className="text-sm text-muted-foreground">Projects Completed</p>
             </div>
             <div className="animate-slideInUp" style={{ animationDelay: "0.4s" }}>
-              <div className="text-3xl font-bold text-accent mb-2">8+</div>
+              <div className="text-3xl font-bold text-accent mb-2">2+</div>
               <p className="text-sm text-muted-foreground">Years Experience</p>
             </div>
             <div className="animate-slideInUp" style={{ animationDelay: "0.6s" }}>
@@ -129,10 +134,10 @@ export default function Hero({ isLoaded }: HeroProps) {
         </div>
 
         <div
-          className={`relative h-96 md:h-full min-h-96 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`relative h-[28rem] sm:h-[32rem] lg:h-full min-h-[24rem] transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-secondary/20 rounded-3xl blur-3xl animate-float" />
-          <div className="relative h-full bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl border border-primary/20 backdrop-blur-sm overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-accent/15 to-secondary/25 dark:from-primary/35 dark:via-accent/25 dark:to-secondary/35 rounded-3xl blur-3xl animate-float" />
+          <div className="relative h-full bg-gradient-to-br from-primary/10 to-accent/10 dark:from-primary/20 dark:to-accent/15 rounded-3xl border border-primary/20 dark:border-primary/40 backdrop-blur-sm overflow-hidden">
             <div className="absolute inset-0 flex items-center justify-center p-8">
               <div className="text-center">
                 {/* Profile Picture Container */}
