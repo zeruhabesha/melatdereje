@@ -20,7 +20,7 @@ export default function Header({ isLoaded }: HeaderProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-background/80 backdrop-blur-md border-b border-border transition-all duration-500 ${isLoaded ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
+      className={`fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-secondary/40 backdrop-blur-md border-b border-border/70 dark:border-primary/30 transition-all duration-500 ${isLoaded ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
     >
       <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
@@ -68,7 +68,7 @@ export default function Header({ isLoaded }: HeaderProps) {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b border-border md:hidden animate-slideInDown">
+          <div className="absolute top-full left-0 right-0 bg-white/95 dark:bg-secondary/50 backdrop-blur-md border-b border-border/70 dark:border-primary/30 md:hidden animate-slideInDown">
             <div className="flex flex-col gap-4 p-6">
               {navItems.map((item, idx) => (
                 <Link

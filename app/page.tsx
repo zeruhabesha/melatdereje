@@ -18,7 +18,6 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen">
-      <div className="interactive-bg" />
       <Header isLoaded={isLoaded} />
       <Hero isLoaded={isLoaded} />
       <About />

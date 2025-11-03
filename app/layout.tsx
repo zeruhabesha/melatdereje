@@ -24,14 +24,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans antialiased`}>
-        <InteractiveBackground />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="interactive-bg" />
+        <ThemeProvider>
+          <InteractiveBackground />
           {children}
           <Analytics />
         </ThemeProvider>
