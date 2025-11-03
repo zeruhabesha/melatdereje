@@ -11,7 +11,7 @@ export default function About() {
   }, [])
 
   return (
-    <section id="about" className="relative py-20 px-6">
+    <section id="about" className="relative py-16 sm:py-20 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <div
           className={`transition-all duration-1000 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
@@ -19,14 +19,14 @@ export default function About() {
           <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold mb-6">
             About Me
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-12 leading-tight text-balance">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-10 sm:mb-12 leading-tight text-balance">
             Creating Spaces That Tell Stories
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
             <div className="space-y-6">
               <p className="text-lg text-muted-foreground leading-relaxed">
-                With over 8 years of experience in architecture and digital design, I've developed a unique approach
+                With over 2 years of experience in architecture and digital design, I've developed a unique approach
                 that merges physical and digital design principles. My passion lies in creating environments and
                 experiences that are both visually stunning and functionally brilliant.
               </p>
@@ -36,7 +36,7 @@ export default function About() {
                 everyday life.
               </p>
 
-              <div className="space-y-3 pt-6 border-t border-border">
+              <div className="space-y-3 pt-6 border-t border-border/70 dark:border-primary/25">
                 <h4 className="text-sm font-bold text-primary uppercase tracking-wider">Education</h4>
                 <div>
                   <p className="font-semibold text-foreground">Architecture & Design Degree</p>
@@ -69,7 +69,7 @@ export default function About() {
             </div>
 
             <div className="space-y-6">
-              <div className="group bg-white/50 backdrop-blur-sm border border-border rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+              <div className="group rounded-2xl p-6 transition-all duration-300 border border-border/70 bg-white/60 dark:bg-secondary/30 backdrop-blur-sm hover:border-primary/60 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20">
                 <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                   Architecture
                 </h3>
@@ -78,7 +78,7 @@ export default function About() {
                 </p>
               </div>
 
-              <div className="group bg-white/50 backdrop-blur-sm border border-border rounded-2xl p-6 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
+              <div className="group rounded-2xl p-6 transition-all duration-300 border border-border/70 bg-white/60 dark:bg-secondary/30 backdrop-blur-sm hover:border-accent/60 hover:shadow-lg hover:shadow-accent/10 dark:hover:shadow-accent/20">
                 <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
                   Digital Design
                 </h3>
@@ -87,7 +87,7 @@ export default function About() {
                 </p>
               </div>
 
-              <div className="group bg-white/50 backdrop-blur-sm border border-border rounded-2xl p-6 hover:border-secondary/50 transition-all duration-300 hover:shadow-lg hover:shadow-secondary/10">
+              <div className="group rounded-2xl p-6 transition-all duration-300 border border-border/70 bg-white/60 dark:bg-secondary/30 backdrop-blur-sm hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/10 dark:hover:shadow-secondary/20">
                 <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-secondary transition-colors">
                   Strategy
                 </h3>
