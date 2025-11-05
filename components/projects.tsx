@@ -236,7 +236,7 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
 
       {/* Enhanced Image Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="w-full max-w-6xl p-0 border-0 bg-transparent shadow-none">
+        <DialogContent className="w-[calc(100%-1rem)] sm:w-full max-w-6xl p-0 bg-white/95 dark:bg-[hsl(var(--card))]/95 rounded-xl shadow-2xl backdrop-blur border border-border/50">
           {selectedProject && (
             <div className="relative w-full h-full">
               {/* Accessible Title (visually hidden) */}
