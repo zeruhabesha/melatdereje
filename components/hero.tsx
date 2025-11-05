@@ -96,6 +96,9 @@ export default function Hero({ isLoaded }: HeroProps) {
               >
                 <span className="inline-block">{profession}</span>
                 <span className="text-primary animate-pulse absolute left-full ml-1">|</span>
+            <p className="text-2xl md:text-3xl font-medium text-muted-foreground w-full flex items-center" aria-live="polite">
+              <span className="inline-flex w-[18ch] sm:w-[20ch] whitespace-nowrap">
+                {profession}
               </span>
             </p>
           </div>
