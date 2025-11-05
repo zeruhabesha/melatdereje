@@ -1,20 +1,46 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ExternalLink } from "lucide-react"
+import { ExternalLink, X } from "lucide-react"
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import Image from "next/image"
 
 interface ProjectsProps {
   portfolioFilter: string
   setPortfolioFilter: (filter: string) => void
 }
 
+interface Project {
+  id: number
+  title: string
+  category: string
+  description: string
+  image: string
+  tags: string[]
+}
+
 export default function Projects({ portfolioFilter, setPortfolioFilter }: ProjectsProps) {
   const [isInView, setIsInView] = useState(false)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => setIsInView(true), 300)
     return () => clearTimeout(timer)
   }, [])
+
+  const openModal = (project: Project) => {
+    setSelectedProject(project)
+    setIsModalOpen(true)
+    document.body.style.overflow = 'hidden' // Prevent scrolling when modal is open
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    document.body.style.overflow = 'unset' // Re-enable scrolling
+    // Small delay to allow the modal to close before resetting the selected project
+    setTimeout(() => setSelectedProject(null), 300)
+  }
 
   const projects = [
     {
@@ -40,7 +66,7 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
       category: "Architecture",
       description:
         "A contemporary residential development featuring sustainable design principles and modern aesthetics.",
-      image: "/modern-luxury-residential-building-with-glass-and-.jpg",
+      image: "/modern-luxury-residential-building-with-glass-and-.png",
       tags: ["Residential", "Sustainable", "Modern"],
     },
     {
@@ -48,7 +74,7 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
       title: "Community Cultural Center",
       category: "Architecture",
       description: "A vibrant community space designed to foster creativity, connection, and cultural exchange.",
-      image: "/contemporary-cultural-center-building-architecture.jpg",
+      image: "/contemporary-cultural-center-building-architecture.png",
       tags: ["Community", "Cultural", "Public Space"],
     },
     {
@@ -57,7 +83,7 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
       category: "Architecture",
       description:
         "Transforming an abandoned industrial area into a mixed-use development with retail, offices, and residences.",
-      image: "/urban-regeneration-modern-architecture-development.jpg",
+      image: "/urban-regeneration-modern-architecture-development.png",
       tags: ["Urban Design", "Mixed-Use", "Sustainable"],
     },
     {
@@ -73,7 +99,7 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
       title: "Residential High-Rise Tower",
       category: "Architecture",
       description: "Iconic residential tower with panoramic views, luxury amenities, and sustainable infrastructure.",
-      image: "/modern-high-rise-residential-tower-architecture.jpg",
+      image: "/modern-high-rise-residential-tower-architecture.png",
       tags: ["Residential", "High-Rise", "Luxury"],
     },
     {
@@ -155,16 +181,19 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
                 className="group bg-white/50 backdrop-blur-sm border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:scale-105 animate-fadeInScale"
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <div className="relative h-64 bg-gradient-to-br from-primary/20 to-accent/20 overflow-hidden">
+                <div 
+                  className="relative h-64 bg-gradient-to-br from-primary/20 to-accent/20 overflow-hidden cursor-pointer"
+                  onClick={() => openModal(project)}
+                >
                   <img
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                    <button className="opacity-0 group-hover:opacity-100 bg-white text-foreground p-3 rounded-full transition-all duration-300 hover:scale-110">
-                      <ExternalLink size={24} />
-                    </button>
+                    <div className="opacity-0 group-hover:opacity-100 bg-white/90 text-foreground p-3 rounded-full transition-all duration-300 hover:scale-110">
+                      <ExternalLink size={20} />
+                    </div>
                   </div>
                 </div>
 
@@ -189,6 +218,79 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
           </div>
         </div>
       </div>
+
+      {/* Enhanced Image Modal */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="w-full max-w-6xl p-0 border-0 bg-transparent shadow-none">
+          {selectedProject && (
+            <div className="relative w-full h-full">
+              {/* Accessible Title (visually hidden) */}
+              <DialogTitle className="sr-only">
+                {selectedProject.title} - Project Details
+              </DialogTitle>
+              <DialogDescription className="sr-only">
+                {selectedProject.description}
+              </DialogDescription>
+              
+              {/* Close Button */}
+              <button
+                onClick={closeModal}
+                className="absolute -top-12 right-0 z-20 p-2 bg-black/50 hover:bg-black/70 rounded-full text-white hover:text-primary transition-all duration-300 transform hover:scale-110"
+                aria-label="Close dialog"
+              >
+                <X size={28} />
+              </button>
+              
+              {/* Image Container */}
+              <div className="relative w-full h-[85vh] max-h-[90vh] overflow-hidden rounded-xl bg-black/5 dark:bg-white/5">
+                <Image
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  width={1600}
+                  height={900}
+                  className="w-full h-full object-contain p-4 md:p-8"
+                  priority
+                  quality={100}
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                  }}
+                />
+                
+                {/* Image Info Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6 pt-12">
+                  <div className="max-w-4xl mx-auto">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white">{selectedProject.title}</h3>
+                    <p className="text-white/80 text-sm md:text-base">{selectedProject.category}</p>
+                    
+                    {/* Project Tags */}
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {selectedProject.tags.map((tag) => (
+                        <span 
+                          key={tag} 
+                          className="text-xs md:text-sm px-3 py-1 bg-primary/20 text-primary rounded-full backdrop-blur-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Navigation Arrows (Placeholder for future implementation) */}
+              {/* <button className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all z-10">
+                <ChevronLeft size={24} />
+              </button>
+              <button className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all z-10">
+                <ChevronRight size={24} />
+              </button> */}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   )
 }
