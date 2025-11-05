@@ -208,6 +208,39 @@ export default function About() {
                   </span>
                 </div>
               </motion.div>
+
+              {/* Tools & Technologies Section */}
+              {/* <motion.div 
+                variants={item}
+                className="lg:col-span-12 mt-12 space-y-6 bg-background/80 dark:bg-background/90 backdrop-blur-sm p-8 rounded-2xl border border-border/50 shadow-sm"
+              >
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="h-px w-6 bg-gradient-to-r from-primary to-primary/0"></div>
+                  <h4 className="text-xs font-semibold text-primary uppercase tracking-wider">Tools & Technologies</h4>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                  {[
+                    'Autodesk Revit',
+                    'Autodesk AutoCAD',
+                    'Adobe Illustrator',
+                    'Adobe Photoshop',
+                    'Chaos Enscape',
+                    'Lumion',
+                    'Figma'
+                  ].map((tool, index) => (
+                    <motion.div 
+                      key={tool}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * index }}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group"
+                    >
+                      <div className="w-2 h-2 rounded-full bg-primary group-hover:scale-125 transition-transform" />
+                      <span className="text-sm font-medium text-foreground">{tool}</span>
+                    </motion.div> */}
+                  {/* ))} */}
+                {/* </div> */}
+              {/* </motion.div> */}
             </motion.div>
           </motion.div>
         </motion.div>

@@ -6,6 +6,7 @@ import Hero from "@/components/hero"
 import About from "@/components/about"
 import Projects from "@/components/projects"
 import Services from "@/components/services"
+import Tools from "@/components/tools"
 import Contact from "@/components/contact"
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <Header isLoaded={isLoaded} />
       <Hero isLoaded={isLoaded} />
       <About />
+      <Tools />
       <Projects portfolioFilter={portfolioFilter} setPortfolioFilter={setPortfolioFilter} />
       <Services />
       <Contact />

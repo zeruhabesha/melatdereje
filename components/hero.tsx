@@ -97,12 +97,20 @@ export default function Hero({ isLoaded }: HeroProps) {
           </div>
 
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
-            Architect & UI Designer crafting beautiful spaces—both physical and digital. I blend timeless design
+            Architect & UI Designer crafting beautiful spaces both physical and digital. I blend timeless design
             principles with modern innovation to create experiences that inspire.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-8 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-full font-semibold hover:shadow-lg hover:shadow-primary/40 transition-all duration-300 flex items-center gap-2 justify-center">
+            <button 
+              onClick={() => {
+                const projectsSection = document.getElementById('projects');
+                if (projectsSection) {
+                  projectsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="px-8 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-full font-semibold hover:shadow-lg hover:shadow-primary/40 transition-all duration-300 flex items-center gap-2 justify-center"
+            >
               View My Work
               <ArrowRight size={20} />
             </button>
