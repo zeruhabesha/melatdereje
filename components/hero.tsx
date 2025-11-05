@@ -89,16 +89,10 @@ export default function Hero({ isLoaded }: HeroProps) {
           </h1>
 
           <div className="typing-container mb-6 h-[3rem] md:h-[3.5rem] flex items-center">
-            <p className="text-2xl md:text-3xl font-medium text-muted-foreground w-full flex items-center" aria-live="polite">
-              <span 
-                className="relative inline-block align-baseline"
-                style={{ minWidth: `${longestProfessionCh}ch` }}
-              >
+            <p className="text-2xl md:text-3xl font-medium text-muted-foreground w-full" aria-live="polite">
+              <span className="relative inline-block">
                 {profession}
-                <span className="text-primary animate-pulse absolute left-full ml-1">|</span>
-              </span>
-              <span className="inline-flex w-[18ch] sm:w-[20ch] whitespace-nowrap">
-                {profession}
+                <span className="text-primary animate-pulse ml-1">|</span>
               </span>
             </p>
           </div>
