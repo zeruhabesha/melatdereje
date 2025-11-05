@@ -329,6 +329,11 @@
 
 /* Base Styles */
 @layer base {
+  html {
+    /* Reserve vertical scrollbar space and avoid width jump across routes/animations */
+    scrollbar-gutter: stable both-edges;
+    overflow-y: scroll;
+  }
   * {
     border-color: hsl(var(--border));
   }
@@ -340,6 +345,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "rlig" 1, "calt" 1;
+    /* Keep layout width stable when vertical scrollbar appears/disappears */
+    scrollbar-gutter: stable both-edges;
+    /* Prevent accidental horizontal scroll from animated elements */
+    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
