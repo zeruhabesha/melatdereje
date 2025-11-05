@@ -178,11 +178,26 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
             {filteredProjects.map((project, idx) => (
               <div
                 key={project.id}
-                className="group bg-white/50 backdrop-blur-sm border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:scale-105 animate-fadeInScale"
-                style={{ animationDelay: `${idx * 0.1}s` }}
+                className="group bg-card/70 dark:bg-card/60 backdrop-blur-sm border border-border rounded-2xl overflow-hidden transition-all duration-300 animate-fadeInScale"
+                style={{ animationDelay: `${idx * 0.1}s`, perspective: 1000 }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget as HTMLDivElement
+                  const rect = card.getBoundingClientRect()
+                  const x = (e.clientX - rect.left) / rect.width
+                  const y = (e.clientY - rect.top) / rect.height
+                  const rotateY = (x - 0.5) * 10
+                  const rotateX = (0.5 - y) * 10
+                  card.style.transform = `translateZ(0) scale(1.02)`
+                  ;(card.firstElementChild as HTMLElement).style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+                }}
+                onMouseLeave={(e) => {
+                  const card = e.currentTarget as HTMLDivElement
+                  card.style.transform = ''
+                  ;(card.firstElementChild as HTMLElement).style.transform = ''
+                }}
               >
                 <div 
-                  className="relative h-64 bg-gradient-to-br from-primary/20 to-accent/20 overflow-hidden cursor-pointer"
+                  className="relative h-64 bg-gradient-to-br from-primary/15 to-accent/15 overflow-hidden cursor-pointer will-change-transform transition-transform duration-300"
                   onClick={() => openModal(project)}
                 >
                   <img
@@ -190,8 +205,8 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 bg-white/90 text-foreground p-3 rounded-full transition-all duration-300 hover:scale-110">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-all duration-300 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 bg-white/95 dark:bg-black/70 text-foreground p-3 rounded-full transition-all duration-300 hover:scale-110">
                       <ExternalLink size={20} />
                     </div>
                   </div>
@@ -221,7 +236,7 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
 
       {/* Enhanced Image Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="w-full max-w-6xl p-0 border-0 bg-transparent shadow-none">
+        <DialogContent className="w-[calc(100%-1rem)] sm:w-full max-w-6xl p-0 bg-white/95 dark:bg-[hsl(var(--card))]/95 rounded-xl shadow-2xl backdrop-blur border border-border/50">
           {selectedProject && (
             <div className="relative w-full h-full">
               {/* Accessible Title (visually hidden) */}

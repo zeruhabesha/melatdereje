@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ThemeToggle } from "./theme-toggle"
 
@@ -10,6 +10,14 @@ interface HeaderProps {
 
 export default function Header({ isLoaded }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const navItems = [
     { label: "Home", href: "#" },
@@ -21,7 +29,11 @@ export default function Header({ isLoaded }: HeaderProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[100] bg-white/98 dark:bg-[hsl(var(--card))]/98 backdrop-blur-md shadow-sm border-b border-border/50 transition-all duration-500 ${isLoaded ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+        scrolled
+          ? "bg-white/85 dark:bg-[hsl(var(--card))]/80 backdrop-blur-xl shadow-md border-b border-border/60"
+          : "bg-white/60 dark:bg-[hsl(var(--card))]/60 backdrop-blur-md border-b border-transparent"
+      } ${isLoaded ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
