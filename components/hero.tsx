@@ -88,8 +88,8 @@ export default function Hero({ isLoaded }: HeroProps) {
           </h1>
 
           <div className="typing-container mb-6 h-[3rem] md:h-[3.5rem] flex items-center">
-            <p className="text-2xl md:text-3xl font-medium text-muted-foreground w-full">
-              <span className="inline-block min-w-[15ch]">
+            <p className="text-2xl md:text-3xl font-medium text-muted-foreground w-full flex items-center" aria-live="polite">
+              <span className="inline-flex w-[18ch] sm:w-[20ch] whitespace-nowrap">
                 {profession}
               </span>
               <span className="text-primary animate-pulse ml-1">|</span>
