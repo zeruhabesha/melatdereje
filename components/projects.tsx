@@ -17,6 +17,7 @@ interface Project {
   description: string
   image: string
   tags: string[]
+  figmaLink?: string
 }
 
 export default function Projects({ portfolioFilter, setPortfolioFilter }: ProjectsProps) {
@@ -49,91 +50,98 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
       category: "Graphics Design",
       description:
         "Complete brand identity design including logo, business cards, and brand guidelines for a modern startup.",
-      image: "/placeholder.jpg",
+      image: "/branding.jpg",
       tags: ["Branding", "Logo Design", "Print"],
+      figmaLink: "https://docs.google.com/presentation/d/18MITO5zhmuucqTf87e4yU2qizyFo8hXGHU4Av5_lV78/edit?pli=1&slide=id.g36870283a6f_0_35#slide=id.g36870283a6f_0_35"
+
     },
     {
       id: 2,
       title: "Marketing Campaign Assets",
       category: "Graphics Design",
       description: "Series of social media graphics and digital ads for a product launch campaign.",
-      image: "/placeholder.jpg",
+      image: "/printing.jpg",
       tags: ["Digital Marketing", "Social Media", "Advertising"],
+      figmaLink: "https://docs.google.com/presentation/d/1lul0Ha70K3uyw9lAnQyAi1Kl9wzuUdCq_xwr-gdYwhc/edit?pli=1&slide=id.g368710a7a34_0_0#slide=id.g368710a7a34_0_0"
+
     },
     {
       id: 3,
-      title: "Luxury Residential Complex",
+      title: "High Rise Project",
       category: "Architecture",
       description:
         "A contemporary residential development featuring sustainable design principles and modern aesthetics.",
-      image: "/modern-luxury-residential-building-with-glass-and-.png",
-      tags: ["Residential", "Sustainable", "Modern"],
+      image: "/modern-high-rise-residential-tower-architecture.png",
+      tags: ["Residential", "High-Rise", "Modern"],
     },
     {
       id: 4,
-      title: "Community Cultural Center",
+      title: "Residential House",
       category: "Architecture",
-      description: "A vibrant community space designed to foster creativity, connection, and cultural exchange.",
-      image: "/contemporary-cultural-center-building-architecture.png",
-      tags: ["Community", "Cultural", "Public Space"],
+      description: "A beautiful single-family residence with modern design and sustainable features.",
+      image: "/modern-luxury-residential-building-with-glass-and-.png",
+      tags: ["Residential", "House", "Modern"],
     },
     {
       id: 5,
-      title: "Urban Regeneration Project",
+      title: "Residential House",
       category: "Architecture",
       description:
-        "Transforming an abandoned industrial area into a mixed-use development with retail, offices, and residences.",
-      image: "/urban-regeneration-modern-architecture-development.png",
-      tags: ["Urban Design", "Mixed-Use", "Sustainable"],
+        "A modern single-family home featuring sustainable design, natural light, and seamless indoor-outdoor living spaces.",
+      image: "/contemporary-cultural-center-building-architecture.png",
+      tags: ["Residential", "House", "Modern"],
     },
     {
       id: 6,
       title: "Modern Office Complex",
       category: "Architecture",
       description: "State-of-the-art office building with open collaborative spaces and green building certification.",
-      image: "/modern-office-building.png",
+      image: "/modernOffice.jpeg",
       tags: ["Commercial", "Office", "Green Building"],
     },
     {
       id: 7,
-      title: "Residential High-Rise Tower",
+      title: "Indigenous Knowledge Development Center",
       category: "Architecture",
-      description: "Iconic residential tower with panoramic views, luxury amenities, and sustainable infrastructure.",
-      image: "/modern-high-rise-residential-tower-architecture.png",
-      tags: ["Residential", "High-Rise", "Luxury"],
+      description: "A cultural and educational hub designed to preserve and promote indigenous knowledge and traditions through innovative architectural design.",
+      image: "/modern-museum-architecture-design.png",
+      tags: ["Cultural", "Education", "Community"],
     },
     {
       id: 8,
       title: "Museum & Exhibition Space",
       category: "Architecture",
       description: "Contemporary museum building with innovative architectural design and flexible exhibition spaces.",
-      image: "/modern-museum-architecture-design.jpg",
+      image: "/contemporary-cultural-center-building-architecture1.jpg",
       tags: ["Cultural", "Exhibition", "Contemporary"],
     },
     {
       id: 9,
-      title: "E-Commerce Platform Redesign",
+      title: "Awdamet Perfume Web Design",
       category: "UI/UX",
       description:
-        "Complete redesign of a major e-commerce platform improving user experience and conversion rates by 45%.",
+        "Elegant and modern web design for Awdamet Perfume, focusing on luxury aesthetics and seamless user experience.",
       image: "/modern-ecommerce-website-interface-design.jpg",
-      tags: ["E-Commerce", "Web Design", "Responsive"],
+      tags: ["E-Commerce", "Luxury Brand", "Web Design"],
+      figmaLink: "https://www.figma.com/design/KxIHbb2NXYR0tRibcbcjZ9/Untitled?node-id=0-1&p=f&t=nsS58onMMLIxTxqM-0"
     },
     {
       id: 10,
-      title: "Mobile App Design System",
+      title: "Mereja Tech Mobile App Design System",
       category: "UI/UX",
-      description: "Comprehensive design system for a fintech mobile application ensuring consistency and scalability.",
-      image: "/fintech-mobile-app-design-interface.jpg",
+      description: "Comprehensive design system for a Mereja Tech mobile application ensuring consistency and scalability.",
+      image: "/merejaTech.jpg",
       tags: ["Mobile", "Design System", "Fintech"],
+      figmaLink: "https://www.figma.com/design/pBlVG4fUhqlMqElR8cA9tK/Meregatech?node-id=0-1&p=f&t=egg4NHSAwwRFw0ZP-0"
     },
     {
       id: 11,
-      title: "SaaS Dashboard Interface",
+      title: "Medical Jobs portal platform Mobile App Design System",
       category: "UI/UX",
-      description: "Intuitive analytics dashboard for a SaaS platform with real-time data visualization and reporting.",
-      image: "/analytics-dashboard-saas-interface-ui-design.jpg",
-      tags: ["Dashboard", "SaaS", "Analytics"],
+      description: "Comprehensive design system for a medical Jobs portal platform mobile application ensuring consistency and scalability.",
+      image: "/medical.jpg",
+      tags: ["Mobile", "Design System", "Fintech"],
+      figmaLink: "https://www.figma.com/design/lfqgob86I6iq3m6pcDrLa6/Health-App?node-id=0-1&p=f&t=SXwRRVosOlHZNkcz-0"
     },
   ]
 
@@ -198,7 +206,13 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
               >
                 <div 
                   className="relative h-64 bg-gradient-to-br from-primary/15 to-accent/15 overflow-hidden cursor-pointer will-change-transform transition-transform duration-300"
-                  onClick={() => openModal(project)}
+                  onClick={() => {
+                  if (project.figmaLink) {
+                    window.open(project.figmaLink, '_blank', 'noopener,noreferrer')
+                  } else {
+                    openModal(project)
+                  }
+                }}
                 >
                   <img
                     src={project.image || "/placeholder.svg"}

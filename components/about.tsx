@@ -154,12 +154,12 @@ export default function About() {
                   Designing sustainable and innovative structures that blend with their environment
                 </p>
                 <div className="mt-auto pt-4 border-t border-border/20">
-                  <span className="inline-flex items-center text-sm text-primary font-medium">
+                  <span className="inline-flex items-center text-sm text-accent font-medium">
                     Explore my work
+                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
                   </span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
                 </div>
               </motion.div>
 
@@ -185,22 +185,21 @@ export default function About() {
                   </span>
                 </div>
               </motion.div>
-
-              <motion.div 
+ <motion.div 
                 whileHover={{ y: -5 }}
-                className="group relative p-6 rounded-2xl border border-border/50 bg-background/80 dark:bg-background/90 backdrop-blur-sm hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/10 dark:hover:shadow-secondary/20 transition-all duration-300 h-full flex flex-col"
+                className="group relative p-6 rounded-2xl border border-border/50 bg-background/80 dark:bg-background/90 backdrop-blur-sm hover:border-accent/60 hover:shadow-lg hover:shadow-accent/10 dark:hover:shadow-accent/20 transition-all duration-300 h-full flex flex-col"
               >
-                <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-xs font-bold text-white">
+                <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-accent flex items-center justify-center text-xs font-bold text-white">
                   03
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-secondary transition-colors">
+                <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
                   Strategy
                 </h3>
                 <p className="text-muted-foreground mb-4">
                   Developing comprehensive design strategies aligned with business goals
                 </p>
                 <div className="mt-auto pt-4 border-t border-border/20">
-                  <span className="inline-flex items-center text-sm text-secondary font-medium">
+                  <span className="inline-flex items-center text-sm text-accent font-medium">
                     Learn more
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -208,6 +207,7 @@ export default function About() {
                   </span>
                 </div>
               </motion.div>
+             
 
               {/* Tools & Technologies Section */}
               {/* <motion.div 
