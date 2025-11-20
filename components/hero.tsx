@@ -157,6 +157,7 @@ export default function Hero({ isLoaded }: HeroProps) {
                     width={224}
                     height={224}
                     className="w-full h-full object-cover"
+                    priority
                   />
                 </div>
                 <p className="text-foreground font-semibold text-lg">Architecture × Design × Innovation</p>
