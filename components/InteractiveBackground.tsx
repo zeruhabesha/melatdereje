@@ -11,7 +11,29 @@ export default function InteractiveBackground() {
   const floatingElements = useRef<HTMLDivElement[]>([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const themeVariant = resolvedTheme ?? 'light';
+
+  const scheduleIdle = useCallback((cb: () => void) => {
+    if (typeof window === 'undefined') return 0;
+    if ('requestIdleCallback' in window) {
+      return (window as Window & { requestIdleCallback: (cb: IdleRequestCallback) => number }).requestIdleCallback(cb);
+    }
+    return window.setTimeout(cb, 0);
+  }, []);
+
+  const cancelIdle = useCallback((id: number) => {
+    if (typeof window === 'undefined') return;
+    if ('cancelIdleCallback' in window) {
+      return (window as Window & { cancelIdleCallback: (handle: number) => void }).cancelIdleCallback(id);
+    }
+    clearTimeout(id);
+  }, []);
+
+  useEffect(() => {
+    const idleHandle = scheduleIdle(() => setIsReady(true));
+    return () => cancelIdle(idleHandle);
+  }, [cancelIdle, scheduleIdle]);
 
   // Handle mouse movement for parallax effect (desktop only)
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -29,6 +51,8 @@ export default function InteractiveBackground() {
   const handleMouseLeave = useCallback(() => setIsHovered(false), []);
 
   useEffect(() => {
+    if (!isReady) return;
+
     const container = containerRef.current;
     if (!container) return;
 
@@ -41,7 +65,7 @@ export default function InteractiveBackground() {
       container.removeEventListener('mouseenter', handleMouseEnter);
       container.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [handleMouseMove, handleMouseEnter, handleMouseLeave]);
+  }, [handleMouseMove, handleMouseEnter, handleMouseLeave, isReady]);
 
   const rebuildGrid = useCallback(() => {
     if (!gridRef.current) return;
@@ -69,7 +93,7 @@ export default function InteractiveBackground() {
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !isReady) return;
 
     rebuildGrid();
 
@@ -80,16 +104,17 @@ export default function InteractiveBackground() {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [rebuildGrid]);
+  }, [isReady, rebuildGrid]);
 
   useEffect(() => {
+    if (!isReady) return;
     rebuildGrid();
-  }, [rebuildGrid, themeVariant]);
+  }, [rebuildGrid, themeVariant, isReady]);
 
   // Create floating elements with responsive sizing
   const createFloatingElements = useCallback(() => {
     // Skip if not in browser or container not available
-    if (typeof window === 'undefined' || !containerRef.current) return;
+    if (typeof window === 'undefined' || !containerRef.current || !isReady) return;
     
     // Clear existing elements
     floatingElements.current.forEach((el: HTMLElement | null) => el?.remove());
@@ -135,11 +160,11 @@ export default function InteractiveBackground() {
       containerRef.current.appendChild(el);
       floatingElements.current.push(el);
     }
-  }, [themeVariant]);
+  }, [themeVariant, isReady]);
 
   useEffect(() => {
     // Skip if not in browser
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !isReady) return;
 
     // Initial creation
     createFloatingElements();
@@ -159,7 +184,7 @@ export default function InteractiveBackground() {
       clearTimeout(resizeTimeout);
       floatingElements.current.forEach(el => el?.remove());
     };
-  }, [createFloatingElements]);
+  }, [createFloatingElements, isReady]);
 
   // Parallax effect for floating elements (desktop only)
   const getParallaxStyle = useCallback((depth = 1) => {
