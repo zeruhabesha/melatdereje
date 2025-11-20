@@ -204,20 +204,23 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
                   ;(card.firstElementChild as HTMLElement).style.transform = ''
                 }}
               >
-                <div 
+                <div
                   className="relative h-64 bg-gradient-to-br from-primary/15 to-accent/15 overflow-hidden cursor-pointer will-change-transform transition-transform duration-300"
                   onClick={() => {
-                  if (project.figmaLink) {
-                    window.open(project.figmaLink, '_blank', 'noopener,noreferrer')
-                  } else {
-                    openModal(project)
-                  }
-                }}
+                    if (project.figmaLink) {
+                      window.open(project.figmaLink, "_blank", "noopener,noreferrer")
+                    } else {
+                      openModal(project)
+                    }
+                  }}
                 >
-                  <img
+                  <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-all duration-300 flex items-center justify-center">
                     <div className="opacity-0 group-hover:opacity-100 bg-white/95 dark:bg-black/70 text-foreground p-3 rounded-full transition-all duration-300 hover:scale-110">
@@ -278,8 +281,7 @@ export default function Projects({ portfolioFilter, setPortfolioFilter }: Projec
                   width={1600}
                   height={900}
                   className="w-full h-full object-contain p-4 md:p-8"
-                  priority
-                  quality={100}
+                  quality={85}
                   style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
